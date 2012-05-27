@@ -4,7 +4,7 @@
   <ul id="stories">
   {% for story in stories %}
      <li class="story_entry">
-       <a href="{{story.href}}" class="story_link">{{story.title}}</a>
+       <a href="{{story.href}}" class="story_link">{{story.title}}</a> &nbsp - %nbsp
        <a href="{{story.author.href}}" class="author_link">{{story.author.name}}</a>
      </li>
   {% endfor %}
