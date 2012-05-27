@@ -8,8 +8,9 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(30), unique=True)
+    username = db.Column(db.String(30))
     password = db.Column(db.String(40))
+    posts = db.relationship('Story', backref='user', lazy='dynamic')
 
     def __init__(self, username, password):
         self.username = username
@@ -17,6 +18,18 @@ class User(db.Model):
 
     def __repr__(self):
         return "<User {0}>".format(self.username)
+
+class Story(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    poster_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    href = db.Column(db.String(255))
+
+    def __init__(self, poster_id, href):
+        self.poster_id = poster_id
+        self.href = href
+
+    def __repr__(self):
+        return "<Story #{0}>".format(self.href)
 
 @app.route('/')
 @app.route('/top')
