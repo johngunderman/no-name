@@ -3,6 +3,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route('/')
+@app.route('/top')
 def top_stories():
     return render_template('stories.html', page_name="Top Stories")
 
