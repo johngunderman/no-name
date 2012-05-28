@@ -17,6 +17,16 @@ def new_stories():
     stories = Story.query.all()
     return render_template('stories.html', page_name="New Stories", stories=stories)
 
+@app.route('/show/')
+@app.route('/show/<id>')
+def show_story(id=None):
+    if id is None:
+        return render_template('not_found.html', page_name="404"), 404
+    story = Story.query.get(id)
+    if story == None:
+        return render_template('not_found.html', page_name="404"), 404
+    return render_template('show.html', page_name=story.title, story=story)
+
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == "GET":
