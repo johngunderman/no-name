@@ -1,44 +1,22 @@
+import database
+from models import User, Story
+
 from flask import Flask, url_for, request, session, redirect, render_template
-from flask.ext.sqlalchemy import SQLAlchemy
 import bcrypt
 
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-db = SQLAlchemy(app)
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(30))
-    password = db.Column(db.String(40))
-    posts = db.relationship('Story', backref='user', lazy='dynamic')
-
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-
-    def __repr__(self):
-        return "<User {0}>".format(self.username)
-
-class Story(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    poster_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    href = db.Column(db.String(255))
-
-    def __init__(self, poster_id, href):
-        self.poster_id = poster_id
-        self.href = href
-
-    def __repr__(self):
-        return "<Story #{0}>".format(self.href)
 
 @app.route('/')
 @app.route('/top')
 def top_stories():
-    return render_template('stories.html', page_name="Top Stories")
+    stories = Story.query.all()
+    return render_template('stories.html', page_name="Top Stories", stories=stories)
 
 @app.route('/new')
 def new_stories():
-    return render_template('stories.html', page_name="New Stories")
+    stories = Story.query.all()
+    return render_template('stories.html', page_name="New Stories", stories=stories)
 
 def hello_world():
     if 'user' in session:
@@ -71,4 +49,5 @@ def login():
 if __name__ == '__main__':
     app.debug = True
     app.secret_key = 'N:COgfe)(*LG#HPSVTHSUCG#RCGNTJQHKWMQBUNC#<RP*CGDJWKHbmjhn'
+    database.init_db()
     app.run()
