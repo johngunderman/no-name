@@ -10,6 +10,7 @@ class User(Base):
     username = Column(String(30))
     password = Column(String(40))
     posts = relationship('Story', backref='user', lazy='dynamic')
+    votes = relationship('Vote', backref='user', lazy='dynamic')
 
     def __init__(self, username, password):
         self.username = username
@@ -24,6 +25,7 @@ class Story(Base):
     title = Column(String(255))
     poster_id = Column(Integer, ForeignKey('user.id'))
     href = Column(String(255))
+    votes = relationship('Vote', backref='story', lazy='dynamic')
 
     def __init__(self, poster_id, title, href):
         self.poster_id = poster_id
@@ -32,3 +34,13 @@ class Story(Base):
 
     def __repr__(self):
         return "<Story #{0}>".format(self.href)
+
+class Vote(Base):
+    __tablename__ = "vote"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    story_id = Column(Integer, ForeignKey('story.id'))
+
+    def __init__(self, user_id, story_id):
+        self.user_id = user_id
+        self.story_id = story_id
