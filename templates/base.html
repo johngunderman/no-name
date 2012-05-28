@@ -1,0 +1,28 @@
+<!doctype html>
+<head>
+  <title>{{page_name}}</title>
+  {% block css %}
+  <link rel="stylesheet" href="static/style.css" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Pontano+Sans|Ruge+Boogie' rel='stylesheet' type='text/css'>
+  {% endblock %}
+</head>
+<body>
+{%block header %}
+<header>
+  <h1 class="site_title">To Be Named</h1>
+  <ul id="menu_bar">
+    <li class="menu_item">
+      <a href="/top" class="menu_link">top</a>
+    </li>
+    <li class="menu_item">
+      <a href="/new" class="menu_link">new</a>
+    </li>
+  </ul>
+</header>
+{% endblock header %}
+<div class="content">
+{% block body %}
+
+{% endblock %}
+</div>
+</body>

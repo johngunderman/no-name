@@ -21,11 +21,13 @@ class User(db.Model):
 
 class Story(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255))
     poster_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     href = db.Column(db.String(255))
 
-    def __init__(self, poster_id, href):
+    def __init__(self, poster_id, title, href):
         self.poster_id = poster_id
+        self.title = title
         self.href = href
 
     def __repr__(self):
@@ -34,11 +36,11 @@ class Story(db.Model):
 @app.route('/')
 @app.route('/top')
 def top_stories():
-    return render_template('stories.html', page_name="Top Stories")
+    return render_template('stories.html', page_name="Top Stories", stories=Story.query.all())
 
 @app.route('/new')
 def new_stories():
-    return render_template('stories.html', page_name="New Stories")
+    return render_template('stories.html', page_name="New Stories", stories=Story.query.all())
 
 def hello_world():
     if 'user' in session:

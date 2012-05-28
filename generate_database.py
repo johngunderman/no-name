@@ -17,10 +17,10 @@ db.session.add(j)
 
 db.session.commit()
 
-s1 = Story(t.id, 'This is story 1')
-s2 = Story(t.id, 'Story 2 is much cooler!')
-s3 = Story(j.id, 'This, story 3, is superior.')
-s4 = Story(j.id, 'Story 4 is the best! I think.')
+s1 = Story(t.id, 'This is story 1', 'http://google.com')
+s2 = Story(t.id, 'Story 2 is much cooler!', 'http://tomdooner.com')
+s3 = Story(j.id, 'This, story 3, is superior.', 'http://causes.com')
+s4 = Story(j.id, 'Story 4 is the best! I think.', 'http://johngunderman.com')
 
 db.session.add(s1)
 db.session.add(s2)
