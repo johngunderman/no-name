@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>User page for {{user.username}}</h1>
+
+<h3>Stories submitted by {{user.username}}</h3>
+
+<ul id="user_stories">
+{% for story in user.posts %}
+   <li class="story_entry">
+     <a href="{{story.href}}" class="story_link">{{story.title}}</a> &nbsp; - &nbsp;
+     <a href="/show/{{story.id}}">(comments)</a>
+   </li>
+{% endfor %}
+</ul>
+{% endblock %}

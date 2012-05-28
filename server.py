@@ -27,6 +27,16 @@ def show_story(id=None):
         return render_template('not_found.html', page_name="404"), 404
     return render_template('show.html', page_name=story.title, story=story)
 
+@app.route('/user/')
+@app.route('/user/<id>')
+def show_user(id=None):
+    if id is None:
+        return render_template('not_found.html', page_name="404"), 404
+    user = User.query.get(id)
+    if user == None:
+        return render_template('not_found.html', page_name="404"), 404
+    return render_template('user.html', page_name=user.username, user=user)
+
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == "GET":
