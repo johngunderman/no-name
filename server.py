@@ -4,9 +4,7 @@ from models import User, Story
 from flask import Flask, url_for, request, session, redirect, render_template
 import bcrypt
 
-
 app = Flask(__name__)
-
 
 @app.route('/')
 @app.route('/top')
