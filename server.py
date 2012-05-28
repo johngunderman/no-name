@@ -34,6 +34,11 @@ def login():
                 session['error'] = "Invalid Password!"
                 return redirect('/login')
 
+@app.route('/logout')
+def logout():
+    del session['user']
+    return redirect('/')
+
 if __name__ == '__main__':
     app.debug = True
     app.secret_key = 'N:COgfe)(*LG#HPSVTHSUCG#RCGNTJQHKWMQBUNC#<RP*CGDJWKHbmjhn'
