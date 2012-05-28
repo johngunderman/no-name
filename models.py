@@ -1,6 +1,6 @@
 from database import Base, db_session
 
-from sqlalchemy import Column, DateTime, Integer, SmallInteger, String, ForeignKey, Text
+from sqlalchemy import Column, DateTime, Integer, SmallInteger, String, ForeignKey, Text, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 
@@ -37,10 +37,15 @@ class Story(Base):
 
 class Vote(Base):
     __tablename__ = "vote"
+    __table_args__ = (
+        UniqueConstraint('user_id', 'story_id'),
+    )
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     story_id = Column(Integer, ForeignKey('story.id'))
+    direction = Column(Integer)
 
-    def __init__(self, user_id, story_id):
+    def __init__(self, user_id, story_id, direction):
         self.user_id = user_id
         self.story_id = story_id
+        self.direction = direction

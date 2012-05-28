@@ -62,16 +62,16 @@ def insert_test_data():
     Add the votes...
     '''
 
-    v1 = Vote(t.id, s1.id)
-    v2 = Vote(t.id, s2.id)
-    v3 = Vote(t.id, s3.id)
-    v4 = Vote(t2.id, s2.id)
-    v5 = Vote(t2.id, s3.id)
-    v6 = Vote(j.id, s2.id)
-    v7 = Vote(j.id, s3.id)
-    v8 = Vote(j.id, s4.id)
-    v9 = Vote(j2.id, s3.id)
-    v10 = Vote(j2.id, s4.id)
+    v1 = Vote(t.id, s1.id, 1)
+    v2 = Vote(t.id, s2.id, 1)
+    v3 = Vote(t.id, s3.id, -1)
+    v4 = Vote(t2.id, s2.id, 1)
+    v5 = Vote(t2.id, s3.id ,-1)
+    v6 = Vote(j.id, s2.id, 1)
+    v7 = Vote(j.id, s3.id, 1)
+    v8 = Vote(j.id, s4.id, 1)
+    v9 = Vote(j2.id, s3.id, 1)
+    v10 = Vote(j2.id, s4.id, -1)
 
     db_session.add(v1)
     db_session.add(v2)
