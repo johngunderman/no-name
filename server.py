@@ -37,10 +37,10 @@ def login():
         else:
             if bcrypt.hashpw(request.form['password'], un.password) == un.password:
                 session['user'] = un.id
-                return redirect(url_for('hello_world'))
+                return redirect('/')
             else:
                 session['error'] = "Invalid Password!"
-                return redirect(url_for('login'))
+                return redirect('/login')
 
 if __name__ == '__main__':
     app.debug = True
