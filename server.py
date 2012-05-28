@@ -28,12 +28,7 @@ def hello_world():
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == "GET":
-        # MAKE ME A TEMPLATEEEEEEE
-        return """<form method='POST'>
-                <b>Username:</b> <input type='text' name='username' /><br>
-                <b>Password:</b> <input type='password' name='password' /><br>
-                <input type='submit' />
-                </form>"""
+        return render_template('login.html')
     elif request.method == "POST":
         un = User.query.filter_by(username=request.form['username']).first()
         if not un:
