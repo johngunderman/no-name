@@ -1,4 +1,15 @@
 {% extends "base.html" %}
 {% block body %}
 <h1><a href={{story.href}}>{{story.title}}</a><h1>
+
+<ul id="comments">
+  {% for comment in story.comments %}
+  <li>
+    <ul>
+      <li>{{comment.user.username}}</li> <br/>
+      <li>{{comment.content}}</li>
+    </ul>
+  <li>
+  {% endfor %}
+</ul>
 {% endblock %}

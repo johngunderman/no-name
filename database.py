@@ -24,7 +24,7 @@ def init_db():
 
 
 def insert_test_data():
-    from models import User, Story, Vote
+    from models import User, Story, Vote, Comment
 
     '''
     Add the users...
@@ -83,5 +83,19 @@ def insert_test_data():
     db_session.add(v8)
     db_session.add(v9)
     db_session.add(v10)
+
+    db_session.commit()
+
+    ## comments
+
+    c1 = Comment(j.id, s1.id, "This story stucks", None)
+    c2 = Comment(j.id, s1.id, "This story stucks even more", None)
+    c3 = Comment(j.id, s1.id, "Your site is broken", None)
+    c4 = Comment(j.id, s1.id, "I like this cheesecake", None)
+
+    db_session.add(c1)
+    db_session.add(c2)
+    db_session.add(c3)
+    db_session.add(c4)
 
     db_session.commit()
