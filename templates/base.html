@@ -17,6 +17,15 @@
     <li class="menu_item">
       <a href="/new" class="menu_link">new</a>
     </li>
+    {% if not 'user' in session %}
+    <li class="menu_item">
+      <a href="{{ url_for('login') }}" class="menu_link">login</a>
+    </li>
+    {% else %}
+    <li class="menu_item">
+      <a href="{{ url_for('logout') }}" class="menu_link">logout</a>
+    </li>
+    {% endif %}
   </ul>
 </header>
 {% endblock header %}
