@@ -1,5 +1,6 @@
 import database
-from models import User, Story
+from database import db_session
+from models import User, Story, Vote
 
 from flask import Flask, url_for, request, session, redirect, render_template
 import bcrypt
@@ -58,6 +59,15 @@ def login():
 def logout():
     del session['user']
     return redirect('/')
+
+@app.route('/vote/<id>/<direction>')
+def vote(id, direction):
+    if 'user' not in session:
+        return redirect('/login')
+    v = (Vote.query.filter_by(user_id=session['user'], story_id=id).first() or Vote(session['user'],id,direction))
+    db_session.add(v)
+    db_session.commit()
+    return redirect(url_for('top_stories'))
 
 if __name__ == '__main__':
     app.debug = True
