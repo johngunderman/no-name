@@ -17,12 +17,6 @@ def new_stories():
     stories = Story.query.all()
     return render_template('stories.html', page_name="New Stories", stories=stories)
 
-def hello_world():
-    if 'user' in session:
-        return 'Youre user: #' + str(session['user'])
-    else:
-        return 'Hello world! <a href="/login">Log In?</a>'
-
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == "GET":
