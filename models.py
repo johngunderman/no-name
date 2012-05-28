@@ -21,11 +21,13 @@ class User(Base):
 class Story(Base):
     __tablename__ = "story"
     id = Column(Integer, primary_key=True)
+    title = Column(String(255))
     poster_id = Column(Integer, ForeignKey('user.id'))
     href = Column(String(255))
 
-    def __init__(self, poster_id, href):
+    def __init__(self, poster_id, title, href):
         self.poster_id = poster_id
+        self.title = title
         self.href = href
 
     def __repr__(self):

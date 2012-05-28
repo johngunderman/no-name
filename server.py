@@ -7,6 +7,7 @@ import bcrypt
 
 app = Flask(__name__)
 
+
 @app.route('/')
 @app.route('/top')
 def top_stories():
